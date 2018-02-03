@@ -35,9 +35,12 @@ import java.util.function.BiFunction;
  * This class implements a hash table, which maps keys to values. Any
  * non-<code>null</code> object can be used as a key or as a value. <p>
  *
+ *     这个类实现了一个hashtable，映射keys到values　，任何飞控实体都可以用来当一个k或v
+ *
  * To successfully store and retrieve objects from a hashtable, the
  * objects used as keys must implement the <code>hashCode</code>
  * method and the <code>equals</code> method. <p>
+ *     为了成功从hashtable存储或者检索一个object，k必须实现hashcode这个方法和equals方法
  *
  * An instance of <code>Hashtable</code> has two parameters that affect its
  * performance: <i>initial capacity</i> and <i>load factor</i>.  The
@@ -50,11 +53,19 @@ import java.util.function.BiFunction;
  * The initial capacity and load factor parameters are merely hints to
  * the implementation.  The exact details as to when and whether the rehash
  * method is invoked are implementation-dependent.<p>
+ *     hashtable的实例化有两个参数会影响他的运行：initial capacity．load factor　
+ *     capacity是hash table中有多少buckets，initial capacity是在创建hashtable时的capacity
+ *     记录hashtable is open：在 hash collision这种情况下，一个bucket存了多个搜索时连续的实体，
+ *     load factor 是在自动增长前这个hashtable允许有多大程度.这两个参数仅仅是针对在实现时．
+ *     更多精确的细节依赖于在rehash什么时候．是否被处罚
  *
  * Generally, the default load factor (.75) offers a good tradeoff between
  * time and space costs.  Higher values decrease the space overhead but
  * increase the time cost to look up an entry (which is reflected in most
  * <tt>Hashtable</tt> operations, including <tt>get</tt> and <tt>put</tt>).<p>
+ *     通常，默认的load factor 是0.75是一个在空间和时间上都很好的权衡．在查询一个值时
+ *     (在hashtalbe的操作中，get,put)，更高的值减少了空间消耗却增加了时间的消耗
+ *
  *
  * The initial capacity controls a tradeoff between wasted space and the
  * need for <code>rehash</code> operations, which are time-consuming.
@@ -62,11 +73,16 @@ import java.util.function.BiFunction;
  * capacity is greater than the maximum number of entries the
  * <tt>Hashtable</tt> will contain divided by its load factor.  However,
  * setting the initial capacity too high can waste space.<p>
+ *     initial capacity控制了时间消耗在空间浪费和rehash之间的平衡．如果initial　capacity
+ *     远远大于实体的最大个数,rehash将永远不会发生.这种情况下，hashtable将被load factor来分开
+ *     无论如何，initiao capacity设置的过大将会浪费空间
  *
  * If many entries are to be made into a <code>Hashtable</code>,
  * creating it with a sufficiently large capacity may allow the
  * entries to be inserted more efficiently than letting it perform
  * automatic rehashing as needed to grow the table. <p>
+ *     如果许多实体被装进hashtable中,在创建时构建一个足够大的空间让实体插入会比让hashtable
+ *     自己通过rehash到需要的大小更高效．
  *
  * This example creates a hashtable of numbers. It uses the names of
  * the numbers as keys:
@@ -94,6 +110,10 @@ import java.util.function.BiFunction;
  * arbitrary, non-deterministic behavior at an undetermined time in the future.
  * The Enumerations returned by Hashtable's keys and elements methods are
  * <em>not</em> fail-fast.
+ *      fail-fast机制:在使用iterator遍历的时候,hashtable的结构如果在建立iterator之后的任何时候被修改，iterator会
+ *      报一个concurrentModificationException的错．因此在并发修改的情况下,iterator更快更干净，
+ *      而不是冒险发生在未来在不确定的行为．
+ *      enumerations返回hashtable的key和方法不是fail-fash 机制
  *
  * <p>Note that the fail-fast behavior of an iterator cannot be guaranteed
  * as it is, generally speaking, impossible to make any hard guarantees in the
@@ -102,6 +122,9 @@ import java.util.function.BiFunction;
  * Therefore, it would be wrong to write a program that depended on this
  * exception for its correctness: <i>the fail-fast behavior of iterators
  * should be used only to detect bugs.</i>
+ *      fail-fast机制在遍历时并不是绝对保障，通俗的说，在不同步的并发操作存在下是不可能保证的
+ *      fail-fast机制最好情况下会throw concurrentModificationException
+ *      不要依靠这个exception的正确性来写程序；fail-fast应该仅仅用来观察bugs．
  *
  * <p>As of the Java 2 platform v1.2, this class was retrofitted to
  * implement the {@link Map} interface, making it a member of the
@@ -440,6 +463,7 @@ public class Hashtable<K,V>
      * Maps the specified <code>key</code> to the specified
      * <code>value</code> in this hashtable. Neither the key nor the
      * value can be <code>null</code>. <p>
+     *     映射指定k,v到hashtable中．k,v不可以为null
      *
      * The value can be retrieved by calling the <code>get</code> method
      * with a key that is equal to the original key.
