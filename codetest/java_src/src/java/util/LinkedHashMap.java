@@ -41,19 +41,25 @@ import java.io.IOException;
  * reinserted into a map <tt>m</tt> if <tt>m.put(k, v)</tt> is invoked when
  * <tt>m.containsKey(k)</tt> would return <tt>true</tt> immediately prior to
  * the invocation.)
+ *      hash talbe和linked list实现了map接口 以一种可预测的迭代顺序 linkedhashmap和hashmap的不同是
+ *      linkedhashmap维护了一个doubly-linked list（双向链表）连接了所有的实体. 这个linked list定义了迭代顺序，
+ *      一般按k插入到map中的顺序,注意如果一个k再次插入,这个插入顺序并不会影响
+ *      在一个k再次插入的时候m.containskey会优先返回ture在put的时候
  *
- * <p>This implementation spares its clients from the unspecified, generally
- * chaotic ordering provided by {@link HashMap} (and {@link Hashtable}),
- * without incurring the increased cost associated with {@link TreeMap}.  It
+ * <p>This implementation spares(备件) its clients from the unspecified(未指明的), generally
+ * chaotic(无秩序的) ordering provided by {@link HashMap} (and {@link Hashtable}),
+ * without incurring(引起) the increased cost associated(关联) with {@link TreeMap}.  It
  * can be used to produce a copy of a map that has the same order as the
- * original, regardless of the original map's implementation:
+ * original 原始的, regardless　无论如何 of the original map's implementation:
  * <pre>
  *     void foo(Map m) {
  *         Map copy = new LinkedHashMap(m);
  *         ...
  *     }
  * </pre>
- * This technique is particularly useful if a module takes a map on input,
+ *      可以用作一个原始的map的备份，不管原来的map怎么实现
+ *
+ * This jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj is particularly useful if a module takes a map on input,
  * copies it, and later returns results whose order is determined by that of
  * the copy.  (Clients generally appreciate having things returned in the same
  * order they were presented.)

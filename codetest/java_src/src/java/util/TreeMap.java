@@ -41,6 +41,8 @@ import java.util.function.Consumer;
  * operations.  Algorithms are adaptations of those in Cormen, Leiserson, and
  * Rivest's <em>Introduction to Algorithms</em>.
  *
+ *      treemap的实现保证了constanskey,get,put,remove操作在时间上的花费为log(n),
+ *
  * <p>Note that the ordering maintained by a tree map, like any sorted map, and
  * whether or not an explicit comparator is provided, must be <em>consistent
  * with {@code equals}</em> if this sorted map is to correctly implement the
@@ -53,6 +55,9 @@ import java.util.function.Consumer;
  * of a sorted map <em>is</em> well-defined even if its ordering is
  * inconsistent with {@code equals}; it just fails to obey the general contract
  * of the {@code Map} interface.
+ *
+ *      treemap维持了一个顺序，像其他排序map一样，不管是否有一个comparator被提供,如果想正确额实现这个接口
+ *      必须与equals一直
  *
  * <p><strong>Note that this implementation is not synchronized.</strong>
  * If multiple threads access a map concurrently, and at least one of the

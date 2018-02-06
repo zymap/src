@@ -64,7 +64,7 @@ import java.util.function.BiFunction;
  * increase the time cost to look up an entry (which is reflected in most
  * <tt>Hashtable</tt> operations, including <tt>get</tt> and <tt>put</tt>).<p>
  *     通常，默认的load factor 是0.75是一个在空间和时间上都很好的权衡．在查询一个值时
- *     (在hashtalbe的操作中，get,put)，更高的值减少了空间消耗却增加了时间的消耗
+ *     (在hashtalbe的操作中，get,put)，更高loadfactor7减少了空间消耗却增加了时间的消耗
  *
  *
  * The initial capacity controls a tradeoff between wasted space and the

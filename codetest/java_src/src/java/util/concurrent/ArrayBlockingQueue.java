@@ -52,6 +52,8 @@ import java.util.Spliterator;
  * element that has been on the queue the shortest time. New elements
  * are inserted at the tail of the queue, and the queue retrieval
  * operations obtain elements at the head of the queue.
+ *      一个有限数组.arrayblockingqueue的元素按照FIFO方式排列，第一个为最早插入元素.
+ *      尾部是最晚插入元素.新元素插入到对列尾部.这个队列去出时从队头取出.
  *
  * <p>This is a classic &quot;bounded buffer&quot;, in which a
  * fixed-sized array holds elements inserted by producers and
@@ -59,6 +61,8 @@ import java.util.Spliterator;
  * changed.  Attempts to {@code put} an element into a full queue
  * will result in the operation blocking; attempts to {@code take} an
  * element from an empty queue will similarly block.
+ *      这是一个典型的有限缓冲.生产者插入到这个可修改大小的数组中，消费者从中取出.
+ *      创建后的大小是固定的，当往一个满的队列中插入时或者从一个空队列取出时，都会阻塞
  *
  * <p>This class supports an optional fairness policy for ordering
  * waiting producer and consumer threads.  By default, this ordering
@@ -66,6 +70,9 @@ import java.util.Spliterator;
  * to {@code true} grants threads access in FIFO order. Fairness
  * generally decreases throughput but reduces variability and avoids
  * starvation.
+ *      arrayblockingqueue对等待中的producer和cunsumer线程支持不公平的访问顺序
+ *      默认情况下，这种顺序是不被保证的.　如果在构造函数中set ture，thread 的访问将按
+ *      fifo顺序访问.不公平尽管降低了生产效率但是降低了变异并且避免了饥饿.
  *
  * <p>This class and its iterator implement all of the
  * <em>optional</em> methods of the {@link Collection} and {@link

@@ -43,6 +43,9 @@ import java.util.function.Function;
  * unsynchronized and permits nulls.)  This class makes no guarantees as to
  * the order of the map; in particular, it does not guarantee that the order
  * will remain constant over time.
+ *      hashtable 是基于map实现的.hashmap实现提供了所有map的操作，并且允许null类型的k,v
+ *      hashmap与hashtable差不多，区别在于hashmap不同步，允许k,v为null．
+ *      这个类不保证map的顺序，尤其是不会保证过段时间后还保持顺序的不变．
  *
  * <p>This implementation provides constant-time performance for the basic
  * operations (<tt>get</tt> and <tt>put</tt>), assuming the hash function
@@ -52,6 +55,9 @@ import java.util.function.Function;
  * of key-value mappings).  Thus, it's very important not to set the initial
  * capacity too high (or the load factor too low) if iteration performance is
  * important.
+ *      hashmap提供了固定时间的get and put
+ *      使用hash来让elements尽可能的分散在buckets中间，iteration遍历的时间比例和buckets的大小加上他的kv大小
+ *      所以initial capcit and load facotr对iteration来说就很重要了
  *
  * <p>An instance of <tt>HashMap</tt> has two parameters that affect its
  * performance: <i>initial capacity</i> and <i>load factor</i>.  The
@@ -63,6 +69,9 @@ import java.util.function.Function;
  * current capacity, the hash table is <i>rehashed</i> (that is, internal data
  * structures are rebuilt) so that the hash table has approximately twice the
  * number of buckets.
+ *      hashmap有两个影响运行的参数initial capacity and load factor. capacity 是hashtable
+ *      中bucket的大小，initial capacity是一个在hash table构建时的大小.load factor是一个自动增长的因子
+ *      当hashtable中超过最大容量时．通过rehashed来重构 hashtable会变成将近原来的两倍
  *
  * <p>As a general rule, the default load factor (.75) offers a good
  * tradeoff between time and space costs.  Higher values decrease the
@@ -74,6 +83,10 @@ import java.util.function.Function;
  * rehash operations.  If the initial capacity is greater than the
  * maximum number of entries divided by the load factor, no rehash
  * operations will ever occur.
+ *      通常情况下，load factor=0.75是一个很好时间和空间的权衡值.更高loadfactor
+ *      减少了空间消耗却增加了时间的消耗．　hashmap中实体的数量和load factor被用作
+ *      设置initial factor,同时也可以使rehash操作的次数最小化.如果initial capacity比
+ *      实体的最大数量除以load facotr　rehash操作永远不会发生.
  *
  * <p>If many mappings are to be stored in a <tt>HashMap</tt>
  * instance, creating it with a sufficiently large capacity will allow
@@ -83,6 +96,8 @@ import java.util.function.Function;
  * down performance of any hash table. To ameliorate impact, when keys
  * are {@link Comparable}, this class may use comparison order among
  * keys to help break ties.
+ *      如果许多键值对存hashmap中,在创建时用一个足够大的空间来存回避自动增长更高效.
+ *      相同的hashcode运行的更慢,为了改善这种情况,k如果可以比较的话
  *
  * <p><strong>Note that this implementation is not synchronized.</strong>
  * If multiple threads access a hash map concurrently, and at least one of
@@ -231,6 +246,7 @@ public class HashMap<K,V> extends AbstractMap<K,V>
 
     /**
      * The default initial capacity - MUST be a power of two.
+     * 默认出事值必须是２的n次放
      */
     static final int DEFAULT_INITIAL_CAPACITY = 1 << 4; // aka 16
 

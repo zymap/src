@@ -55,6 +55,12 @@ import sun.misc.Unsafe;
  * #setState} and {@link #compareAndSetState} is tracked with respect
  * to synchronization.
  *
+ *      实现阻塞锁以及相关同步装置(semaphores,events等).他们依靠一个FIFO等待队列．
+ *      这个类被设置来对大多数同步装置来说有用的基础，用一个原子变量来代表其状态.
+ *      子类必须通过定义protected方法来改变这个状态,同事定义这个状态在当前类中应该是acquired还是released
+ *      基于这些，这个类中其他方法执行排队并且阻塞计划.　自雷可以维护一些其他的属性,
+ *      当原子操作更新使用getState,setState
+ *
  * <p>Subclasses should be defined as non-public internal helper
  * classes that are used to implement the synchronization properties
  * of their enclosing class.  Class
@@ -805,8 +811,7 @@ public abstract class AbstractQueuedSynchronizer
              * Predecessor was cancelled. Skip over predecessors and
              * indicate retry.
              */
-            do {
-                node.prev = pred = pred.prev;
+            do {LLde.prev = pred = pred.prev;
             } while (pred.waitStatus > 0);
             pred.next = node;
         } else {
