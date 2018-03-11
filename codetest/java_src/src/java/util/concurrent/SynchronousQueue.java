@@ -58,11 +58,18 @@ import java.util.Spliterators;
  * {@code SynchronousQueue} acts as an empty collection.  This queue
  * does not permit {@code null} elements.
  *
+ *      每一次插入操作必须等待一次相应的另一个线程的取操作.这是一个没有大小的通队列.
+ *      不能对一个通部队里了进行取值因为这个值只有在remove的时候才可以出现，也不能插入一个值
+ *      除非有另一个线程在等待这个值.不能遍历因为没什么可遍历的.这个对垒不允许空值
+ *
  * <p>Synchronous queues are similar to rendezvous channels used in
  * CSP and Ada. They are well suited for handoff designs, in which an
  * object running in one thread must sync up with an object running
  * in another thread in order to hand it some information, event, or
  * task.
+ *
+ *      同步队列和指定通道的csp和ada很像.他们很适合被用来做传送数据.一个运行的线程同步一个object
+ *      和另一个为了从中拿到信息运行的线程
  *
  * <p>This class supports an optional fairness policy for ordering
  * waiting producer and consumer threads.  By default, this ordering
@@ -97,6 +104,10 @@ public class SynchronousQueue<E> extends AbstractQueue<E>
      * similar. Fifo usually supports higher throughput under
      * contention but Lifo maintains higher thread locality in common
      * applications.
+     *
+     *      这个类实现了一个"非阻塞条件同步并发"的双向栈和双向队列的扩展.
+     *      stack是不公平模式,queue是公平模式.
+     *      fifo支持更高的生产　lifo维持了更高的线程位置
      *
      * A dual queue (and similarly stack) is one that at any given
      * time either holds "data" -- items provided by put operations,

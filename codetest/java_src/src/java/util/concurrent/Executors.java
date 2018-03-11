@@ -81,6 +81,10 @@ public class Executors {
      * execute subsequent tasks.  The threads in the pool will exist
      * until it is explicitly {@link ExecutorService#shutdown shutdown}.
      *
+     *      建立一个线程池可修改大小的无限大小的队列．任何时候都醉倒只有nthreads运行任务，
+     *      如果线程池里的线程都在运作时加进来一个线程，会一直等到一个thread是可用的如果有现成因为
+     *      坏了，一个新的就会代替.
+     *
      * @param nThreads the number of threads in the pool
      * @return the newly created thread pool
      * @throws IllegalArgumentException if {@code nThreads <= 0}
@@ -101,6 +105,10 @@ public class Executors {
      * guarantees about the order in which submitted tasks are
      * executed.
      *
+     *     创建一个通过给定的并行级别来维持足够的线程数,可能使用多个队列来减小争夺.
+     *     并行级别和最大运行线程数相一致,或者与可用的　进行中的任务,这个work-stealing pool
+     *     并不能保证提交的任务的执行顺序
+     *
      * @param parallelism the targeted parallelism level
      * @return the newly created thread pool
      * @throws IllegalArgumentException if {@code parallelism <= 0}
@@ -120,6 +128,8 @@ public class Executors {
      * @return the newly created thread pool
      * @see #newWorkStealingPool(int)
      * @since 1.8
+     *
+     *      将所有核用作work-stealing　的并行级别
      */
     public static ExecutorService newWorkStealingPool() {
         return new ForkJoinPool
@@ -211,6 +221,9 @@ public class Executors {
      * may be created using {@link ThreadPoolExecutor} constructors.
      *
      * @return the newly created thread pool
+     *
+     * 这个线程池提高了程序运行许多短周期同步任务．execute会使用之前创建的都可用的thread
+     * 60秒不用的话会被移出进入idel状态
      */
     public static ExecutorService newCachedThreadPool() {
         return new ThreadPoolExecutor(0, Integer.MAX_VALUE,

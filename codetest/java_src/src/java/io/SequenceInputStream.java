@@ -39,6 +39,9 @@ import java.util.Vector;
  * and so on, until end of file is reached
  * on the last of the contained input streams.
  *
+ *      sequenceinputstream 代表了逻辑链接其他input stream
+ *
+ *
  * @author  Author van Hoff
  * @since   JDK1.0
  */

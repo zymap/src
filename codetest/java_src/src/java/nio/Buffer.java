@@ -34,6 +34,8 @@ import java.util.Spliterator;
  * primitive type.  Aside from its content, the essential properties of a
  * buffer are its capacity, limit, and position: </p>
  *
+ *      buffer 是一个线性的，有限元素序列,是一种特殊的积累,　buffer必要的属性:capacity,limit,position
+ *
  * <blockquote>
  *
  *   <p> A buffer's <i>capacity</i> is the number of elements it contains.  The
